@@ -187,8 +187,14 @@
         
         isWaiting = true;
         const currentQ = questions[currentIndex];
+        const inputNum = parseInt(inputValue, 10);
         
-        if (parseInt(inputValue, 10) === currentQ.answer) {
+        // 24時と0時をどちらも正解とみなす
+        const isCorrect = inputNum === currentQ.answer || 
+                          (inputNum === 0 && currentQ.answer === 24) || 
+                          (inputNum === 24 && currentQ.answer === 0);
+        
+        if (isCorrect) {
           // 正解の処理
           if (!hasMistakedCurrentQuestion) {
             score++;
